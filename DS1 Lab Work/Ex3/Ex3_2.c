@@ -12,25 +12,26 @@ typedef struct med{
 
 int check(med m[N], int a, int *size){
 	int ll=0;
-	int ul=*size;
+	int ul=*size-1;
 	int retVal = -1;
 	while(ul>=ll){
 		int mid = (ul+ll)/2;
 		if (m[mid].medID == a){
 			retVal = mid;
+			break;
 		}
 		else if(m[mid].medID > a){
-			ul=mid-1;
+			ll=mid+1;
 		}
 		else if(m[mid].medID < a){
-			ll=mid+1;
+			ul=mid-1;
 		}
 	}
 	return retVal;
 }
 
 void insert(med m[N], med n, int *size){
-	int i = *size;
+	int i = *size-1;
 	while(n.medID>m[i].medID && i>=0){
 		m[i+1]=m[i];
 		i--;
@@ -51,13 +52,13 @@ void input(med n[N], int *size){
 	printf("Enter Vendor of Medicine: ");
 	fgets(m.vendor,49,stdin);	
 	printf("Enter Price of Medicine: ");
-	scanf("%d",&m.price);
+	scanf("%d%*c",&m.price);
 	printf("Enter Stock of Medicine: ");
-	scanf("%d",&m.stock);
+	scanf("%d%*c",&m.stock);
 	printf("Enter Month of Manufacure of Medicine: ");
-	scanf("%d",&m.manDate[0]);
+	scanf("%d%*c",&m.manDate[0]);
 	printf("Enter Year of Manufacure of Medicine: ");
-	scanf("%d",&m.manDate[1]);
+	scanf("%d%*c",&m.manDate[1]);
 	m.expDate[1] = m.manDate[1] + 1;
 	m.expDate[0] = m.manDate[0]; 
 	insert(n,m,size);
@@ -69,9 +70,10 @@ void buy(med m[N], int a, int *size){
 	int index = check(m,a,size);	
 	if(index!=-1){
 		int n;	
-		printf("How many to buy: ");
+		printf("How many to buy: \n");
 		scanf("%d",&n);
 		m[index].stock+=n;
+		printf("%d medicines purchased\n",n);
 	}
 	else{
 		printf("This medicine is not in the database: \n");
@@ -83,13 +85,22 @@ void buy(med m[N], int a, int *size){
 void sell(med m[N], int a, int *size){
 	int index = check(m,a,size);
 	if(index!=-1 && m[index].stock > 0){
-		m[index].stock-=1;
+		int n;
+		printf("How many to sell: \n");
+		scanf("%d",&n);		
+		if(n<=m[index].stock){
+			m[index].stock-=n;
+			printf("%d units sold\n",n);
+		}
+		else{
+			printf("Insufficient Stock\n");
+		}
 		if(m[index].stock < 5){
-			printf("WARNING : Only %d stock left.",m[index].stock);
+			printf("WARNING : Only %d stock left.\n",m[index].stock);
 		}
 	}
 	else{
-		printf("That medicine is not available ");
+		printf("That medicine is not available \n");
 	}
 }
 
@@ -134,7 +145,7 @@ void main(){
 			case 3:
 				printf("Enter ID of Medicine to Check\n");
 				scanf("%d",&query);
-				printf("%d",check(m,query,&size));
+				printf("There is %d stock left\n",m[check(m,query,&size)].stock);
 				break;
 			case 4:
 				display(m,&size);
