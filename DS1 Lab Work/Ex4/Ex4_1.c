@@ -8,19 +8,28 @@ void main(int argc,char *argv[]){
 	strcpy(f1,argv[1]);
 	strcpy(f2,argv[2]);
 	fp1=fopen(f1,"r");
-	fp2=fopen(f2,"w");
+	fp2=fopen(f2,"r");
 	if(fp1 == NULL){
 		printf("File Does not Exist");
-	
-	}	
+		}	
 	else{
 		if(fp2!=NULL){
 			int choice;
 			printf("This File Exists, 1. Overwrite, 2.Append \n");
 			scanf("%d",&choice);
+			
 			if(choice == 2){
-				fseek(fp2,0,SEEK_END);
+				fclose(fp2);
+				fp2 = fopen(f2,"a");
+			}
+			else{
+				fclose(fp2);
+				fp2 = fopen(f2,"w");
 			}	
+		}
+		else{
+			
+			fp2 = fopen(f2,"w");
 		}
 		while (1){
 			char a;
@@ -34,7 +43,8 @@ void main(int argc,char *argv[]){
 			}
 
 		}
+		fclose(fp1);
+		fclose(fp2);
 	}
-	fclose(fp1);
-	fclose(fp2);
+	
 }
