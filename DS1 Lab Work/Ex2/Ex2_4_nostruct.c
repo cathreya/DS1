@@ -1,5 +1,5 @@
 #include <stdio.h>
-#define N 2 
+#define N 5 
 
 
 
@@ -59,13 +59,13 @@ void fn4(char city[N][50], int year[N], int lit[N][N], int m){
 void fn5(char city[N][50], int year[N], int lit[N][N]){
 	int i,j;
 	for (i=0;i<N;i++){
-		printf("\t%5d", year[i]);
+		printf("\t\t%5d", year[i]);
 	}
 	printf("\n");
 	for (i=0;i<N;i++){
 		printf("%s", city[i]);
 		for(j=0;j<N;j++){
-			printf("\t%5d", lit[i][j]);
+			printf("\t\t%5d", lit[i][j]);
 		}
 		printf("\n");
 	}				

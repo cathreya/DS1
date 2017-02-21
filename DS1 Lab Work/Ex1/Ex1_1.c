@@ -21,6 +21,6 @@ void main(){
 		}
 	}	
 	final=amt-(amt*disc/100);
-	printf("Congrats you recieved a Discount of %d \%\n",disc);
+	printf("Congrats you recieved a Discount of %d %%\n",disc);
 	printf("Final Amount after Discount is : %0.2f\n",final);
 }

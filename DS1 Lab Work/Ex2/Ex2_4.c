@@ -1,5 +1,5 @@
 #include <stdio.h>
-#define N 2 
+#define N 5
 
 typedef struct table{
 	char city[N][50];
