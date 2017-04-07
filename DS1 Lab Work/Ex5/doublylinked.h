@@ -69,10 +69,16 @@ void insert(nxtptr previous,nxtptr head){
 
 void delete(char n[200],nxtptr head){
 	nxtptr previous = find(n,head);
-	previous->prev->next = previous->next;
-	previous->next->prev = previous->prev;
-	free(previous);
-	printf("Deleted\n");
+	if(previous->next == NULL){
+		previous->prev->next = NULL;
+		free(previous);
+	}
+	else{
+		previous->prev->next = previous->next;
+		previous->next->prev = previous->prev;
+		free(previous);
+		printf("Deleted\n");
+	}
 }
 
 
@@ -87,5 +93,13 @@ void display(nxtptr head){
 
 void displayPN(char a[200],nxtptr head){
 	nxtptr elem = find(a,head);
-	printf("Previous Name: %s, Following Name: %s \n",elem->prev,elem->next);
+	if(elem->next == NULL){
+		printf("Previous Name: %s\n",elem->prev);
+	}
+	else if(elem->prev == head){
+		printf("Next Name: %s\n",elem->next);
+	}
+	else{
+		printf("Previous Name: %s, Following Name: %s \n",elem->prev,elem->next);
+	}
 }

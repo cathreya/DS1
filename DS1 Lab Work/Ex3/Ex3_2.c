@@ -1,5 +1,5 @@
 #include <stdio.h>
-#define N 5
+#define N 10
 typedef struct med{
 	int medID;
 	char name[50];
@@ -45,20 +45,18 @@ void input(med n[N], int *size){
 	int i;
 	printf("Enter Details \n");
 	
-	printf("Enter the ID of the Medicine: ");
+    printf("Enter the ID of the Medicine: ");
 	scanf("%d%*c",&m.medID);
 	printf("Enter Name of Medicine: ");
-	fgets(m.name,49,stdin);
+	scanf("%s%*c",m.name);
 	printf("Enter Vendor of Medicine: ");
-	fgets(m.vendor,49,stdin);	
+	scanf("%s%*c",m.vendor);	
 	printf("Enter Price of Medicine: ");
 	scanf("%d%*c",&m.price);
 	printf("Enter Stock of Medicine: ");
 	scanf("%d%*c",&m.stock);
-	printf("Enter Month of Manufacure of Medicine: ");
-	scanf("%d%*c",&m.manDate[0]);
-	printf("Enter Year of Manufacure of Medicine: ");
-	scanf("%d%*c",&m.manDate[1]);
+	printf("Enter Date of Manufacure of Medicine as MM/YY: ");
+	scanf("%d/%d%*c",&m.manDate[0],&m.manDate[1]);
 	m.expDate[1] = m.manDate[1] + 1;
 	m.expDate[0] = m.manDate[0]; 
 	insert(n,m,size);
@@ -109,16 +107,16 @@ void sell(med m[N], int a, int *size){
 
 void display(med m[N],int *size){
 	int i;
-	printf("Medicine ID\tName\tVendor\tPrice\tManufacture Date\tExpiry Date\tStock\n");
+	printf("Medicine ID\t Name\t\t Vendor\t\t Price\t Manufacture Date\t Expiry Date\tStock\n");
 	for(i=0;i<*size;i++){
-		printf("%d\t %s\t %s\t %d\t %d/%d\t %d/%d\t %d\t\n",m[i].medID,m[i].name,m[i].vendor,m[i].price,m[i].manDate[0],m[i].manDate[1],m[i].expDate[0],m[i].expDate[1],m[i].stock);
+		printf("%11d  %8s  %16s %14d %15d/%d %13d/%d %8d\n",m[i].medID,m[i].name,m[i].vendor,m[i].price,m[i].manDate[0],m[i].manDate[1],m[i].expDate[0],m[i].expDate[1],m[i].stock);
 	}
 }
 
 
 void main(){
 	med m[N];
-	int size,i,entry;
+	int size=0,i,entry;
 	printf("Enter how many Medicines\n");			
 	scanf("%d",&entry);
 	for(i=0;i<entry;i++){

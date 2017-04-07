@@ -18,7 +18,7 @@ void main(){
 			case 2: printf("Enter Name to search for: ");
 				scanf("%s",&n);
 				if(find(n,head)){
-					printf("It is found at address %p",find(n,head));
+					printf("It is found at address %p\n",find(n,head));
 				}
 				else{
 					printf("Not Found\n");

@@ -1,0 +1,38 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include "stackadt.h"
+
+void main(){
+	printf("Enter Size of Stack Required: ");
+	int n;
+	scanf("%d",&n);
+	ptr stack1 = createStack(n);
+
+	int choice=1;
+	int a;
+	while(choice!=0){
+		printf("1. Push, 2.Pop, 3.Return Top, 4.Display, 5.Dispose: ");
+		scanf("%d",&choice);
+		switch(choice){
+			case 1:
+				
+				scanf("%d",&a);
+				push(a,stack1);
+				break;
+			case 2:
+				pop(stack1);
+				break;
+			case 3:
+				printf("%d\n",retTop(stack1));
+				break;
+
+			case 4:
+				display(stack1);
+				break;
+			case 5:
+				dispose(stack1);
+				choice=0;
+				break;
+		}
+	}
+}

@@ -34,10 +34,11 @@ void main(int argc, char const *argv[]){
 		if(strstr(line,query)){
 			printf("Phone Number Found : %s\n",line );
 			flag = 1;
+			break;
 		}
 
 	}
-	if(flag == 0){
+	if(flag == 0){	
 		printf("Not Found\n");
 	}
 	fclose(f1);
